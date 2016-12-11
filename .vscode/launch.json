@@ -5,9 +5,46 @@
             "name": "Python",
             "type": "python",
             "request": "launch",
-            "stopOnEntry": true,
+            "stopOnEntry": True,
             "pythonPath": "${config.python.pythonPath}",
             "program": "${file}",
+            "cwd": "${workspaceRoot}",
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
+            ]
+        },
+        {
+            "name": "PySpark",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": True,
+            "osx": {
+                "pythonPath": "${env.SPARK_HOME}/bin/spark-submit"
+            },
+            "windows": {
+                "pythonPath": "${env.SPARK_HOME}/bin/spark-submit.cmd"
+            },
+            "linux": {
+                "pythonPath": "${env.SPARK_HOME}/bin/spark-submit"
+            },
+            "program": "${file}",
+            "cwd": "${workspaceRoot}",
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
+            ]
+        },
+        {
+            "name": "Python Module",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": True,
+            "pythonPath": "${config.python.pythonPath}",
+            "module": "module.name",
+            "cwd": "${workspaceRoot}",
             "debugOptions": [
                 "WaitOnAbnormalExit",
                 "WaitOnNormalExit",
@@ -18,9 +55,10 @@
             "name": "Integrated Terminal/Console",
             "type": "python",
             "request": "launch",
-            "stopOnEntry": true,
+            "stopOnEntry": True,
             "pythonPath": "${config.python.pythonPath}",
             "program": "${file}",
+            "cwd": "null",
             "console": "integratedTerminal",
             "debugOptions": [
                 "WaitOnAbnormalExit",
@@ -31,9 +69,10 @@
             "name": "External Terminal/Console",
             "type": "python",
             "request": "launch",
-            "stopOnEntry": true,
+            "stopOnEntry": True,
             "pythonPath": "${config.python.pythonPath}",
             "program": "${file}",
+            "cwd": "null",
             "console": "externalTerminal",
             "debugOptions": [
                 "WaitOnAbnormalExit",
@@ -44,9 +83,10 @@
             "name": "Django",
             "type": "python",
             "request": "launch",
-            "stopOnEntry": true,
+            "stopOnEntry": True,
             "pythonPath": "${config.python.pythonPath}",
             "program": "${workspaceRoot}/manage.py",
+            "cwd": "${workspaceRoot}",
             "args": [
                 "runserver",
                 "--noreload"
@@ -62,9 +102,10 @@
             "name": "Flask",
             "type": "python",
             "request": "launch",
-            "stopOnEntry": false,
+            "stopOnEntry": False,
             "pythonPath": "${config.python.pythonPath}",
             "program": "fully qualified path fo 'flask' executable. Generally located along with python interpreter",
+            "cwd": "${workspaceRoot}",
             "env": {
                 "FLASK_APP": "${workspaceRoot}/quickstart/app.py"
             },
@@ -83,9 +124,10 @@
             "name": "Flask (old)",
             "type": "python",
             "request": "launch",
-            "stopOnEntry": false,
+            "stopOnEntry": False,
             "pythonPath": "${config.python.pythonPath}",
             "program": "${workspaceRoot}/run.py",
+            "cwd": "${workspaceRoot}",
             "args": [],
             "debugOptions": [
                 "WaitOnAbnormalExit",
@@ -97,9 +139,10 @@
             "name": "Watson",
             "type": "python",
             "request": "launch",
-            "stopOnEntry": true,
+            "stopOnEntry": True,
             "pythonPath": "${config.python.pythonPath}",
             "program": "${workspaceRoot}/console.py",
+            "cwd": "${workspaceRoot}",
             "args": [
                 "dev",
                 "runserver",
