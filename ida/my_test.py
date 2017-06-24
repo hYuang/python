@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-# @Date    : 2016-08-12 14:18:10
-# @Author  : giantbranch (giantbranch@gmail.com)
-# @Link    : http://blog.csdn.net/u012763794?viewmode=contents
+# the cpu dump not working on win10 but on xp is good
 
 import my_debugger
 debugger = my_debugger.debugger()
