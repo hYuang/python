@@ -9,6 +9,8 @@ class debugger():
         self.h_process = None
         self.pid = None
         self.debugger_active = False
+        self.h_thread = None
+        self.context = None
 
     
     def load(self,path_to_exe):
@@ -44,11 +46,10 @@ class debugger():
 
     def attach(self,pid):
         self.h_process = self.open_process(pid)
-
         if kernel32.DebugActiveProcess(pid):
             self.debugger_active = True
             self.pid = int(pid)
-            #self.run()
+            self.run()
         else:
             print "[*] Unbale to attach to the process"
     
@@ -62,8 +63,8 @@ class debugger():
         continue_status = DBG_CONTINUE
 
         if kernel32.WaitForDebugEvent(byref(debug_event),INFINITE):
-            raw_input("press a key to continue ... ")
-            self.debugger_active = False
+            self.h_thread = self.open_thread(debug_event.dwThreadId)
+            self.context = self.get_thread_context(self.h_thread)
             kernel32.ContinueDebugEvent(debug_event.dwProcessId,
                                         debug_event.dwProcessId,
                                         continue_status)
@@ -114,5 +115,16 @@ class debugger():
             print "get_thread_context fail."
             return False
         
+def get_debug_event(self):
+    debug_event = DEBUG_EVENT()
+    continus_status = DBG_CONTINUE
+
+    if kernel32.WaitForDebugEvent(byref(debug_event),INFINITE):
+        self.h_thread = self.open_thread(debug_event.dwThreadId)
+        self.context = self.get_thread_context(h_thread=self.h_thread)
+        self.debug_event = debug_event
+        print "Event Code : %d Thread ID %d" %(debug_event.dwDebugEventCode,debug_event.dwThreadId)
+
+    kernel32.ContinueDebugEvent(debug_event.dwProcessId,debug_event.dwThreadId,continus_status)
 
 
