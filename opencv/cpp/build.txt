@@ -1,0 +1,6 @@
+
+g++ file.cpp -o file 
+
+pkg-config --cflags --libs opencv
+
+-L/usr/local/lib -lopencv_world
