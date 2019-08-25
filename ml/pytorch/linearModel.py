@@ -67,6 +67,8 @@ model.eval();
 predict = model(Variable(x_train));
 predict = predict.data.numpy();
 
+
+
 plt.plot(x_train.numpy(),y_train.numpy(),'ro',label='Original data')
 plt.plot(x_train.numpy(),predict,label='Fitting Line')
 plt.show()
