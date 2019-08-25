@@ -1,6 +1,8 @@
 import torch
 import numpy as np
 import torch.nn as nn
+import torch.optim as optim
+from torch.autograd import Variable
 import matplotlib.pyplot as plt
 
 
@@ -32,5 +34,41 @@ if torch.cuda.is_available():
 else:
     model = LinearRegression();
 
-plt.scatter(x_train.data.numpy(),y_train.data.numpy())
+##plt.scatter(x_train.data.numpy(),y_train.data.numpy())
+##plt.show()
+
+
+criterion = nn.MSELoss();
+optimizer = optim.SGD(model.parameters(),lr=1e-3)
+
+num_epochs = 1000
+
+for epoch in range(num_epochs):
+    if torch.cuda.is_available():
+        inputs = Variable(x_train).cuda();
+        target = Variable(y_train).cuda();
+    else:
+        inputs = Variable(x_train);
+        target = Variable(y_train);
+
+    out = model(inputs);
+    loss = criterion(out,target);
+
+
+    optimizer.zero_grad();
+    loss.backward();
+    optimizer.step();
+
+    if (epoch+1) % 20 == 0:
+        print('Epoch[{}/{}], loss: {:.6f}'.format(epoch+1,num_epochs,loss.data))
+
+
+model.eval();
+predict = model(Variable(x_train));
+predict = predict.data.numpy();
+
+plt.plot(x_train.numpy(),y_train.numpy(),'ro',label='Original data')
+plt.plot(x_train.numpy(),predict,label='Fitting Line')
 plt.show()
+
+
